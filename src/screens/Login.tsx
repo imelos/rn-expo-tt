@@ -16,7 +16,7 @@ export default function Login({
       <Button
         title="sign in with google"
         onPress={() => {
-          navigation.replace("userInfo");
+          navigation.replace("userInfo", {email: 'vovik'});
         }}
       />
     </View>

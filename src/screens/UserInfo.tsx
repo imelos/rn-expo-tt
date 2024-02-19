@@ -1,23 +1,20 @@
-import { useState, useEffect } from "react";
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import { Button } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../App";
-
-// export type UserInfoScreenProps = StackNavigationProp<RootStackParamList, "userInfo">;
+import { Props } from "../../App";
 
 export interface UserInfoScreenProps {
-    navigation: StackNavigationProp<RootStackParamList, "userInfo">;
- }
+  navigation: StackNavigationProp<RootStackParamList, "userInfo">;
+}
 
-export default function UserInfo(): JSX.Element {
+const UserInfo: React.FC<Props<"userInfo">> = ({ route, navigation }) => {
+  const { email } = route.params;
   return (
     <View style={styles.container}>
-      <Text>userInfo</Text>
+      <Text>{email}</Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -27,3 +24,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+export default UserInfo;

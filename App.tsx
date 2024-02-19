@@ -6,6 +6,8 @@ import { Button } from "react-native";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RouteProp } from "@react-navigation/core";
 
 import * as WebBrowser from "expo-web-browser";
 
@@ -16,7 +18,7 @@ WebBrowser.maybeCompleteAuthSession();
 
 export type RootStackParamList = {
   login: undefined;
-  userInfo: undefined;
+  userInfo: { email: string };
 };
 
 const RootStack = createStackNavigator<RootStackParamList>();
@@ -30,15 +32,27 @@ const navTheme = {
 };
 
 const linking = {
-  prefixes: ['myurlhere://'],
+  prefixes: ["myurlhere://"],
   config: {
-
     screens: {
-      login: 'login',
-      userInfo: 'userInfo',
+      login: "login",
+      userInfo: "userInfo",
     },
   },
 };
+
+export type ScreenNavigationProp<T extends keyof RootStackParamList> =
+  StackNavigationProp<RootStackParamList, T>;
+
+export type ScreenRouteProp<T extends keyof RootStackParamList> = RouteProp<
+  RootStackParamList,
+  T
+>;
+export type Props<T extends keyof RootStackParamList> = {
+  route: ScreenRouteProp<T>;
+  navigation: ScreenNavigationProp<T>;
+};
+
 export default function App(): JSX.Element {
   return (
     <NavigationContainer theme={navTheme} linking={linking}>
