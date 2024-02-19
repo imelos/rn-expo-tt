@@ -2,13 +2,9 @@ import { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { Button } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { Props } from "../../App";
 
-import { UserInfoScreenProps } from "./UserInfo";
-
-export default function Login({
-  navigation,
-}: UserInfoScreenProps): JSX.Element {
+const Login: React.FC<Props<"login">> = ({navigation}) => {
   return (
     <View style={styles.container}>
       {/* <GoogleLoginBtn /> */}
@@ -21,7 +17,7 @@ export default function Login({
       />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -31,3 +27,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+export default Login;

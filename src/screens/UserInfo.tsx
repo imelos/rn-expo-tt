@@ -3,9 +3,9 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../App";
 import { Props } from "../../App";
 
-export interface UserInfoScreenProps {
-  navigation: StackNavigationProp<RootStackParamList, "userInfo">;
-}
+// export interface UserInfoScreenProps {
+//   navigation: StackNavigationProp<RootStackParamList, "userInfo">;
+// }
 
 const UserInfo: React.FC<Props<"userInfo">> = ({ route, navigation }) => {
   const { email } = route.params;
