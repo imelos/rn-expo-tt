@@ -4,6 +4,9 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { Button } from 'react-native';
 
+import { NavigationContainer } from '@react-navigation/native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
 
@@ -83,11 +86,15 @@ export default function App():JSX.Element {
   }, [response]);
 
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app2!21</Text>
-      <Button title= "sign in with google" onPress={()=>{promptAsync()}}/>
-      <StatusBar style="auto" />
-    </View>
+    <GestureHandlerRootView style={{flex:1}}>
+      <NavigationContainer>
+        <View style={styles.container}>
+          <Text>Open up App.js to start working on your app2!21</Text>
+          <Button title= "sign in with google" onPress={()=>{promptAsync()}}/>
+          <StatusBar style="auto" />
+        </View>
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 }
 
