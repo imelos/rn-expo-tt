@@ -20,7 +20,7 @@ export default function App():JSX.Element {
   //client IDs from .env
   const config = {
     androidClientId: "622762714548-m965a490quddb91hmr7qe3q1dn8c7qf1.apps.googleusercontent.com",
-    iosClientId: "622762714548-7vki4k50gss2edvc3l4ppq51bmqb25cb.apps.googleusercontent.com",
+    iosClientId: "622762714548-a8fe8fn6qtqok6kooccab0fdlaliblef.apps.googleusercontent.com",
     webClientId: "622762714548-7vki4k50gss2edvc3l4ppq51bmqb25cb.apps.googleusercontent.com",
   };
 
