@@ -2,23 +2,19 @@ import { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { Button } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../App";
 
-import { UserInfoScreenProps } from "./UserInfo";
+// export type UserInfoScreenProps = StackNavigationProp<RootStackParamList, "userInfo">;
 
-export default function Login({
-  navigation,
-}: UserInfoScreenProps): JSX.Element {
+export interface UserInfoScreenProps {
+    navigation: StackNavigationProp<RootStackParamList, "userInfo">;
+ }
+
+export default function UserInfo(): JSX.Element {
   return (
     <View style={styles.container}>
-      {/* <GoogleLoginBtn /> */}
-      <Text>login</Text>
-      <Button
-        title="sign in with google"
-        onPress={() => {
-          navigation.replace("userInfo");
-        }}
-      />
+      <Text>userInfo</Text>
     </View>
   );
 }

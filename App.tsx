@@ -10,6 +10,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import * as WebBrowser from "expo-web-browser";
 
 import Login from "./src/screens/Login";
+import UserInfo from "./src/screens/UserInfo";
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -28,12 +29,22 @@ const navTheme = {
   },
 };
 
+const linking = {
+  prefixes: ['myurlhere://'],
+  config: {
+
+    screens: {
+      login: 'login',
+      userInfo: 'userInfo',
+    },
+  },
+};
 export default function App(): JSX.Element {
   return (
-    <NavigationContainer theme={navTheme}>
+    <NavigationContainer theme={navTheme} linking={linking}>
       <RootStack.Navigator
         screenOptions={{
-          headerShown: false,
+          // headerShown: false,
           headerStyle: {
             backgroundColor: "#797979",
           },
@@ -45,7 +56,12 @@ export default function App(): JSX.Element {
           <RootStack.Screen
             name="login"
             component={Login}
-            options={{ title: "Home" }}
+            options={{ title: "Login" }}
+          />
+          <RootStack.Screen
+            name="userInfo"
+            component={UserInfo}
+            options={{ title: "User Info" }}
           />
         </RootStack.Group>
       </RootStack.Navigator>
