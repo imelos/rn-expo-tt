@@ -15,7 +15,7 @@ import { setItem, getItem } from "../../storage/storage";
 
 WebBrowser.maybeCompleteAuthSession();
 
-export default function App(): JSX.Element {
+export default function GoogleLoginBtn(): JSX.Element {
   const [userInfo, setUserInfo] = useState(null);
 
   //client IDs from .env
@@ -84,20 +84,12 @@ export default function App(): JSX.Element {
   }, [response]);
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <NavigationContainer>
-        <View style={styles.container}>
-          <Text>Open up App.js to start working on your app2!21</Text>
-          <Button
-            title="sign in with google"
-            onPress={() => {
-              promptAsync();
-            }}
-          />
-          <StatusBar style="auto" />
-        </View>
-      </NavigationContainer>
-    </GestureHandlerRootView>
+    <Button
+      title="sign in with google"
+      onPress={() => {
+        promptAsync();
+      }}
+    />
   );
 }
 

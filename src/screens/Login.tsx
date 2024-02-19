@@ -3,9 +3,12 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { Button } from "react-native";
 
+import GoogleLoginBtn from "../components/google/button";
+
 export default function Login(): JSX.Element {
   return (
     <View style={styles.container}>
+      <GoogleLoginBtn />
       <Text>login</Text>
     </View>
   );

@@ -12,7 +12,14 @@ import * as WebBrowser from "expo-web-browser";
 import Login from "./src/screens/Login";
 
 WebBrowser.maybeCompleteAuthSession();
-const RootStack = createStackNavigator();
+
+export type RootStackParamList = {
+  login: undefined;
+  userInfo: undefined;
+};
+
+const RootStack = createStackNavigator<RootStackParamList>();
+
 const navTheme = {
   ...DefaultTheme,
   colors: {
@@ -20,6 +27,7 @@ const navTheme = {
     background: "#fff",
   },
 };
+
 export default function App(): JSX.Element {
   return (
     <NavigationContainer theme={navTheme}>
@@ -44,12 +52,3 @@ export default function App(): JSX.Element {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
