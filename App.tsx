@@ -1,16 +1,15 @@
+import { useState, useEffect } from "react";
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
+import { Button } from "react-native";
 
-import { useState, useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { Button } from 'react-native';
-
-import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import * as WebBrowser from "expo-web-browser";
 
-import Login from './src/screens/Login';
+import Login from "./src/screens/Login";
 
 WebBrowser.maybeCompleteAuthSession();
 const RootStack = createStackNavigator();
@@ -18,26 +17,27 @@ const navTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    background: '#fff',
+    background: "#fff",
   },
 };
-export default function App():JSX.Element {
+export default function App(): JSX.Element {
   return (
     <NavigationContainer theme={navTheme}>
       <RootStack.Navigator
         screenOptions={{
           headerShown: false,
           headerStyle: {
-            backgroundColor: '#797979',
+            backgroundColor: "#797979",
           },
-          headerTintColor: '#fff',
-          headerTitleAlign: 'center',
-        }}>
+          headerTintColor: "#fff",
+          headerTitleAlign: "center",
+        }}
+      >
         <RootStack.Group>
           <RootStack.Screen
             name="login"
             component={Login}
-            options={{title: 'Home'}}
+            options={{ title: "Home" }}
           />
         </RootStack.Group>
       </RootStack.Navigator>
@@ -48,8 +48,8 @@ export default function App():JSX.Element {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
