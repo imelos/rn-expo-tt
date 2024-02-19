@@ -12,7 +12,7 @@ import * as Google from "expo-auth-session/providers/google";
 
 import * as SecureStore from 'expo-secure-store';
 
-import { setItem, getItem } from './src/storage/storage'
+import { setItem, getItem } from '../../storage/storage'
 
 WebBrowser.maybeCompleteAuthSession();
 
