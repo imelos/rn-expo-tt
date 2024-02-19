@@ -9,6 +9,8 @@ import * as Google from "expo-auth-session/providers/google";
 
 import * as SecureStore from 'expo-secure-store';
 
+import { setItem, getItem } from './src/storage/storage'
+
 WebBrowser.maybeCompleteAuthSession();
 
 export default function App():JSX.Element {
@@ -18,8 +20,8 @@ export default function App():JSX.Element {
   //client IDs from .env
   const config = {
     androidClientId: "622762714548-m965a490quddb91hmr7qe3q1dn8c7qf1.apps.googleusercontent.com",
-    // iosClientId: "739821462721-d4nf5tnd2k9p4asa93h5gf6b1idhr2b0.apps.googleusercontent.com",
-    webClientId: "622762714548-6ql0mptcrvrng2ug55mk4rv42t4bp6as.apps.googleusercontent.com",
+    iosClientId: "622762714548-7vki4k50gss2edvc3l4ppq51bmqb25cb.apps.googleusercontent.com",
+    webClientId: "622762714548-7vki4k50gss2edvc3l4ppq51bmqb25cb.apps.googleusercontent.com",
   };
 
   const [request, response, promptAsync] = Google.useAuthRequest(config);
@@ -43,7 +45,7 @@ export default function App():JSX.Element {
       const user = await resp.json();
       console.log(user)
       //store user information  in Asyncstorage
-      await SecureStore.setItemAsync("user", JSON.stringify(user));
+      await setItem("user", JSON.stringify(user));
       
       setUserInfo(user);
     } catch (error) {
@@ -58,7 +60,7 @@ export default function App():JSX.Element {
   const signInWithGoogle = async () => {
     try {
       // Attempt to retrieve user information from AsyncStorage
-      const userJSON = await SecureStore.getItemAsync("user");
+      const userJSON = await getItem("user");
       console.log("IM HERE1111")
       console.log(userJSON)
       if (userJSON) {
