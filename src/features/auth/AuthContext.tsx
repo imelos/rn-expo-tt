@@ -47,6 +47,7 @@ export const AuthContext = createContext<{
   state: AuthState;
 }>(null);
 
+export const USER_KEY = "user";
 export const AuthContextProvider = ({ children }: PropsWithChildren<{}>) => {
   const [state, dispatch] = React.useReducer(authReducer, {
     isLoading: true,
@@ -58,7 +59,7 @@ export const AuthContextProvider = ({ children }: PropsWithChildren<{}>) => {
     const bootstrapAsync = async () => {
       let user;
       try {
-        user = await getItem("user");
+        user = await getItem(USER_KEY);
       } catch (e) {
         // Restoring token failed
       }
@@ -71,11 +72,11 @@ export const AuthContextProvider = ({ children }: PropsWithChildren<{}>) => {
   const authContext = React.useMemo(
     () => ({
       signIn: async (email) => {
-        await setItem("user", email);
+        await setItem(USER_KEY, email);
         dispatch({ type: AuthActionTypes.SIGN_IN, email });
       },
       signOut: async () => {
-        await deleteItem("user");
+        await deleteItem(USER_KEY);
         dispatch({ type: AuthActionTypes.SIGN_OUT });
       },
       state: state,
