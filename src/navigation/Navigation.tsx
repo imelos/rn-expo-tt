@@ -1,7 +1,5 @@
-import { useState, useEffect, useContext } from "react";
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import { Button } from "react-native";
+import { useContext } from "react";
+import { Text, View } from "react-native";
 
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -57,10 +55,6 @@ export type Props<T extends keyof RootStackParamList> = {
 
 export default function Navigation(): JSX.Element {
   const authContext = useContext(AuthContext);
-  console.log("context");
-  console.log(authContext);
-  console.log(authContext.state.email);
-
   if (authContext.state.isLoading) {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
