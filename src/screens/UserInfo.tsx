@@ -1,17 +1,18 @@
-import { StyleSheet, Text, View } from "react-native";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "../../App";
-import { Props } from "../../App";
+import { useContext } from "react";
+import { StyleSheet, Text, View, Button } from "react-native";
+import { AuthContext } from "../features/auth/AuthContext";
 
-// export interface UserInfoScreenProps {
-//   navigation: StackNavigationProp<RootStackParamList, "userInfo">;
-// }
-
-const UserInfo: React.FC<Props<"userInfo">> = ({ route, navigation }) => {
-  // const { email } = route.params;
+const UserInfo: React.FC = () => {
+  const authContext = useContext(AuthContext);
   return (
     <View style={styles.container}>
-      <Text>ss</Text>
+      <Text>{authContext.state.email}</Text>
+      <Button
+        title="Log out"
+        onPress={() => {
+          authContext.signOut();
+        }}
+      />
     </View>
   );
 };
