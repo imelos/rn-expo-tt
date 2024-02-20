@@ -14,71 +14,13 @@ import * as WebBrowser from "expo-web-browser";
 import Login from "./src/screens/Login";
 import UserInfo from "./src/screens/UserInfo";
 
-WebBrowser.maybeCompleteAuthSession();
-
-export type RootStackParamList = {
-  login: undefined;
-  userInfo: { email: string };
-};
-
-const RootStack = createStackNavigator<RootStackParamList>();
-
-const navTheme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    background: "#fff",
-  },
-};
-
-const linking = {
-  prefixes: ["myurlhere://"],
-  config: {
-    screens: {
-      login: "login",
-      userInfo: "userInfo",
-    },
-  },
-};
-
-export type ScreenNavigationProp<T extends keyof RootStackParamList> =
-  StackNavigationProp<RootStackParamList, T>;
-
-export type ScreenRouteProp<T extends keyof RootStackParamList> = RouteProp<
-  RootStackParamList,
-  T
->;
-export type Props<T extends keyof RootStackParamList> = {
-  route: ScreenRouteProp<T>;
-  navigation: ScreenNavigationProp<T>;
-};
+import { AuthContextProvider } from "./src/features/auth/AuthContext";
+import Navigation from "./src/navigation/Navigation";
 
 export default function App(): JSX.Element {
   return (
-    <NavigationContainer theme={navTheme} linking={linking}>
-      <RootStack.Navigator
-        screenOptions={{
-          // headerShown: false,
-          headerStyle: {
-            backgroundColor: "#797979",
-          },
-          headerTintColor: "#fff",
-          headerTitleAlign: "center",
-        }}
-      >
-        <RootStack.Group>
-          <RootStack.Screen
-            name="login"
-            component={Login}
-            options={{ title: "Login" }}
-          />
-          <RootStack.Screen
-            name="userInfo"
-            component={UserInfo}
-            options={{ title: "User Info" }}
-          />
-        </RootStack.Group>
-      </RootStack.Navigator>
-    </NavigationContainer>
+    <AuthContextProvider>
+      <Navigation/>
+    </AuthContextProvider>
   );
 }

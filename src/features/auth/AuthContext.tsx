@@ -40,9 +40,13 @@ function authReducer(prevState: AuthState, action: AuthAction) {
   }
 }
 
-export const AuthContext = createContext(null);
+export const AuthContext = createContext<{
+  signIn: (email: string) => void;
+  signOut: () => void;
+  state: AuthState;
+}>(null);
 
-export const DataProvider = ({ children }: PropsWithChildren<{}>) => {
+export const AuthContextProvider = ({ children }: PropsWithChildren<{}>) => {
   const [state, dispatch] = React.useReducer(authReducer, {
     isLoading: true,
     isSignout: false,
@@ -51,23 +55,13 @@ export const DataProvider = ({ children }: PropsWithChildren<{}>) => {
   const authContext = React.useMemo(
     () => ({
       signIn: async (data) => {
-        // In a production app, we need to send some data (usually username, password) to server and get a token
-        // We will also need to handle errors if sign in failed
         // After getting token, we need to persist the token using `SecureStore`
         // In the example, we'll use a dummy token
 
         dispatch({ type: AuthActionTypes.SIGN_IN, email: "dummy-auth-token" });
       },
       signOut: () => dispatch({ type: AuthActionTypes.SIGN_OUT }),
-      signUp: async (data) => {
-        // In a production app, we need to send user data to server and get a token
-        // We will also need to handle errors if sign up failed
-        // After getting token, we need to persist the token using `SecureStore`
-        // In the example, we'll use a dummy token
-
-        dispatch({ type: AuthActionTypes.SIGN_IN, email: "dummy-auth-token" });
-      },
-      authState: state,
+      state: state,
     }),
     []
   );
