@@ -1,5 +1,5 @@
 import React, { createContext, PropsWithChildren } from "react";
-import { getItem } from "../../storage/storage";
+import { getItem, setItem, deleteItem } from "../../storage/storage";
 
 enum AuthActionTypes {
   RESTORE = "RESTORE_EMAIL",
@@ -86,7 +86,10 @@ export const AuthContextProvider = ({ children }: PropsWithChildren<{}>) => {
       signIn: async (data) => {
         dispatch({ type: AuthActionTypes.SIGN_IN, email: "dummy-auth-token" });
       },
-      signOut: () => dispatch({ type: AuthActionTypes.SIGN_OUT }),
+      signOut: async () => {
+        await deleteItem('user');
+        dispatch({ type: AuthActionTypes.SIGN_OUT })
+      },
       state: state,
     }),
     [state]

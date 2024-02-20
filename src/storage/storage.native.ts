@@ -7,3 +7,7 @@ export function getItem(key:string) {
 export function setItem(key:string, val:string) {
    return SecureStore.setItemAsync(key, val);
 }
+
+export function deleteItem(key:string) {
+  return SecureStore.deleteItemAsync(key);
+}
