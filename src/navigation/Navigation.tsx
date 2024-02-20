@@ -7,14 +7,10 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RouteProp } from "@react-navigation/core";
 
-import * as WebBrowser from "expo-web-browser";
-
 import Login from "./../screens/Login";
 import UserInfo from "./../screens/UserInfo";
 
 import { AuthContext } from "../features/auth/AuthContext";
-
-WebBrowser.maybeCompleteAuthSession();
 
 export type RootStackParamList = {
   login: undefined;
