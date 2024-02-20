@@ -55,27 +55,14 @@ export const AuthContextProvider = ({ children }: PropsWithChildren<{}>) => {
   });
 
   React.useEffect(() => {
-    // Fetch the token from storage then navigate to our appropriate place
     const bootstrapAsync = async () => {
       let user;
       try {
         user = await getItem("user");
-        console.log("user token");
-        console.log("user token");
-        console.log("user token");
-        console.log(user);
       } catch (e) {
         // Restoring token failed
       }
-
-      // After restoring token, we may need to validate it in production apps
-
-      // This will switch to the App screen or Auth screen and this loading
-      // screen will be unmounted and thrown away.
-      console.log(user.email);
-      console.log(user.email);
       dispatch({ type: AuthActionTypes.RESTORE, email: user });
-      console.log(state);
     };
 
     bootstrapAsync();
@@ -83,12 +70,13 @@ export const AuthContextProvider = ({ children }: PropsWithChildren<{}>) => {
 
   const authContext = React.useMemo(
     () => ({
-      signIn: async (data) => {
-        dispatch({ type: AuthActionTypes.SIGN_IN, email: "dummy-auth-token" });
+      signIn: async (email) => {
+        await setItem("user", email);
+        dispatch({ type: AuthActionTypes.SIGN_IN, email });
       },
       signOut: async () => {
-        await deleteItem('user');
-        dispatch({ type: AuthActionTypes.SIGN_OUT })
+        await deleteItem("user");
+        dispatch({ type: AuthActionTypes.SIGN_OUT });
       },
       state: state,
     }),
