@@ -57,9 +57,17 @@ export type Props<T extends keyof RootStackParamList> = {
 
 export default function Navigation(): JSX.Element {
   const authContext = useContext(AuthContext);
-  console.log('context')
-  console.log(authContext.state.email)
+  console.log("context");
+  console.log(authContext);
+  console.log(authContext.state.email);
 
+  if (authContext.state.isLoading) {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Text>Loading</Text>
+      </View>
+    );
+  }
   return (
     <NavigationContainer theme={navTheme} linking={linking}>
       <RootStack.Navigator
@@ -72,16 +80,19 @@ export default function Navigation(): JSX.Element {
           headerTitleAlign: "center",
         }}
       >
-        <RootStack.Screen
+        {authContext.state.email === null ? (
+          <RootStack.Screen
             name="login"
             component={Login}
             options={{ title: "Login" }}
           />
+        ) : (
           <RootStack.Screen
             name="userInfo"
             component={UserInfo}
             options={{ title: "User Info" }}
           />
+        )}
       </RootStack.Navigator>
     </NavigationContainer>
   );

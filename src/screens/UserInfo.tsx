@@ -8,10 +8,10 @@ import { Props } from "../../App";
 // }
 
 const UserInfo: React.FC<Props<"userInfo">> = ({ route, navigation }) => {
-  const { email } = route.params;
+  // const { email } = route.params;
   return (
     <View style={styles.container}>
-      <Text>{email}</Text>
+      <Text>ss</Text>
     </View>
   );
 };
