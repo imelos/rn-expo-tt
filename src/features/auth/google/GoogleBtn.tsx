@@ -6,12 +6,9 @@ import { AuthContext } from "../AuthContext";
 const GoogleLoginBtn = (): JSX.Element => {
   const authContext = useContext(AuthContext);
   const config = {
-    androidClientId:
-      "622762714548-m965a490quddb91hmr7qe3q1dn8c7qf1.apps.googleusercontent.com",
-    iosClientId:
-      "622762714548-a8fe8fn6qtqok6kooccab0fdlaliblef.apps.googleusercontent.com",
-    webClientId:
-      "622762714548-7vki4k50gss2edvc3l4ppq51bmqb25cb.apps.googleusercontent.com",
+    androidClientId: process.env.ANDROID_CLIENT_ID,
+    iosClientId: process.env.IOS_CLIENT_ID,
+    webClientId: process.env.WEB_CLIENT_ID,
   };
 
   const [request, response, promptAsync] = Google.useAuthRequest(config);
@@ -34,12 +31,8 @@ const GoogleLoginBtn = (): JSX.Element => {
   };
 
   const signInWithGoogle = async () => {
-    try {
-      if (response?.type === "success") {
-        getUserInfo(response.authentication.accessToken);
-      }
-    } catch (error) {
-      console.error("Error retrieving user data from AsyncStorage:", error);
+    if (response?.type === "success") {
+      getUserInfo(response.authentication.accessToken);
     }
   };
 

@@ -35,6 +35,7 @@
     },
     "plugins": [
       "expo-secure-store"
-    ]
+    ],
+    "scheme": ["rn-expo-tt", "fb937586767483443"]
   }
 }
